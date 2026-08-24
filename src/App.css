@@ -1,0 +1,39 @@
+/* Import Google Fonts — must be first */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
+
+/* ============================================================
+   SNEHA WORLD — Global App Styles
+   ============================================================ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #1a0a2e;
+  cursor: default;
+}
+
+/* Canvas pointer cursor when playing */
+canvas {
+  cursor: crosshair;
+  display: block;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 128, 171, 0.4);
+  border-radius: 3px;
+}
+
