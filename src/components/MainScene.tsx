@@ -26,6 +26,7 @@ import { WorldCollectibles } from './world/WorldCollectibles';
 import { SnehaLandAttractions } from './world/SnehaLandAttractions';
 import { AsansolCityExpansion } from './world/AsansolCityExpansion';
 import { AsansolLocalSpots } from './world/AsansolLocalSpots';
+import { PrissiAndGunnuJhula } from './world/PrissiAndGunnuJhula';
 
 // ── Asset loading simulator ──────────────────────────────────
 
@@ -130,6 +131,11 @@ function SceneInner() {
       {/* ── Category A: Maithon Dam, Phuchka Stall, Mishti Mukh, Festive Puja Pandal ── */}
       <Suspense fallback={null}>
         <AsansolLocalSpots />
+      </Suspense>
+
+      {/* ── Prissi & Gunnu on the Royal Flower Jhula ── */}
+      <Suspense fallback={null}>
+        <PrissiAndGunnuJhula />
       </Suspense>
     </>
   );
