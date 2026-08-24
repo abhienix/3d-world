@@ -36,15 +36,15 @@ export function AtmosphereController() {
             intensity={1.2}
             position={[-15, 25, -15]}
             castShadow
-            shadow-mapSize-width={2048}
-            shadow-mapSize-height={2048}
-            shadow-camera-near={0.1}
-            shadow-camera-far={150}
-            shadow-camera-left={-70}
-            shadow-camera-right={70}
-            shadow-camera-top={70}
-            shadow-camera-bottom={-70}
-            shadow-bias={-0.001}
+            shadow-mapSize-width={1024}
+            shadow-mapSize-height={1024}
+            shadow-camera-near={0.5}
+            shadow-camera-far={120}
+            shadow-camera-left={-60}
+            shadow-camera-right={60}
+            shadow-camera-top={60}
+            shadow-camera-bottom={-60}
+            shadow-bias={-0.0005}
           />
           <directionalLight color="#FF1493" intensity={0.8} position={[15, 12, 10]} />
           <hemisphereLight args={['#3F51B5', '#1A0028', 0.6]} />
@@ -68,15 +68,15 @@ export function AtmosphereController() {
             intensity={1.9}
             position={[25, 35, 20]}
             castShadow
-            shadow-mapSize-width={2048}
-            shadow-mapSize-height={2048}
-            shadow-camera-near={0.1}
-            shadow-camera-far={150}
-            shadow-camera-left={-70}
-            shadow-camera-right={70}
-            shadow-camera-top={70}
-            shadow-camera-bottom={-70}
-            shadow-bias={-0.001}
+            shadow-mapSize-width={1024}
+            shadow-mapSize-height={1024}
+            shadow-camera-near={0.5}
+            shadow-camera-far={120}
+            shadow-camera-left={-60}
+            shadow-camera-right={60}
+            shadow-camera-top={60}
+            shadow-camera-bottom={-60}
+            shadow-bias={-0.0005}
           />
           <directionalLight color="#FF80AB" intensity={0.5} position={[-15, 15, -5]} />
           <hemisphereLight args={['#E1F5FE', '#FCE4EC', 0.75]} />
@@ -102,15 +102,15 @@ export function AtmosphereController() {
             intensity={1.8}
             position={[20, 18, 20]}
             castShadow
-            shadow-mapSize-width={2048}
-            shadow-mapSize-height={2048}
-            shadow-camera-near={0.1}
-            shadow-camera-far={150}
-            shadow-camera-left={-70}
-            shadow-camera-right={70}
-            shadow-camera-top={70}
-            shadow-camera-bottom={-70}
-            shadow-bias={-0.001}
+            shadow-mapSize-width={1024}
+            shadow-mapSize-height={1024}
+            shadow-camera-near={0.5}
+            shadow-camera-far={120}
+            shadow-camera-left={-60}
+            shadow-camera-right={60}
+            shadow-camera-top={60}
+            shadow-camera-bottom={-60}
+            shadow-bias={-0.0005}
           />
           <directionalLight color="#FF4081" intensity={0.75} position={[-15, 12, -5]} />
           <directionalLight color="#7B1FA2" intensity={0.45} position={[0, 8, -20]} />

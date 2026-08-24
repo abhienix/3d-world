@@ -568,6 +568,9 @@ function StreetLampRow() {
       {LAMP_POSITIONS.map((pos, i) => (
         <VictorianStreetLamp key={i} position={pos} />
       ))}
+      {/* 2 Regional Warm Ambient Lights instead of 10 individual point lights */}
+      <pointLight position={[0, 3.5, 0]} color="#FFE082" intensity={1.8} distance={22} decay={2} />
+      <pointLight position={[0, 3.5, -20]} color="#FFE082" intensity={1.8} distance={22} decay={2} />
     </group>
   );
 }
@@ -585,13 +588,11 @@ function VictorianStreetLamp({ position }: { position: [number, number, number] 
         <sphereGeometry args={[0.1, 8, 8]} />
         <meshStandardMaterial color={GOLD} metalness={0.9} />
       </mesh>
-      {/* Glowing Glass Lantern */}
+      {/* Glowing Glass Lantern (High Emissive for realistic glow without heavy point light overhead) */}
       <mesh position={[0, 2.9, 0]}>
         <octahedronGeometry args={[0.22, 0]} />
-        <meshStandardMaterial color="#FFFDE7" emissive="#FFD700" emissiveIntensity={1.8} transparent opacity={0.9} />
+        <meshStandardMaterial color="#FFFDE7" emissive="#FFD700" emissiveIntensity={2.5} transparent opacity={0.95} />
       </mesh>
-      {/* Warm Ambient Lamp Light */}
-      <pointLight position={[0, 2.9, 0]} color="#FFE082" intensity={1.2} distance={8} decay={2} />
     </group>
   );
 }

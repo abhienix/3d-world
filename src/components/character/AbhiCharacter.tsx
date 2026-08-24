@@ -19,6 +19,12 @@ const LOVE_MESSAGES = [
   'Always by your side, Sneha ❤️',
 ];
 
+// Pre-allocated static scratch vectors (0 Garbage Collection overhead)
+const _followOffset = new THREE.Vector3();
+const _targetPos = new THREE.Vector3();
+const _dir = new THREE.Vector3();
+const _lookTarget = new THREE.Vector3();
+
 interface AbhiCharacterProps {
   playerRef: React.RefObject<THREE.Group | null>;
 }
@@ -52,37 +58,37 @@ export function AbhiCharacter({ playerRef }: AbhiCharacterProps) {
     // Target position: trailing 2.2 units behind Sneha
     const playerPos = player.position;
     const playerRot = player.rotation.y;
-    const followOffset = new THREE.Vector3(
+    _followOffset.set(
       -Math.sin(playerRot) * 2.2 + 0.8,
       0,
       -Math.cos(playerRot) * 2.2
     );
 
-    const targetPos = playerPos.clone().add(followOffset);
-    const distToTarget = abhi.position.distanceTo(targetPos);
+    _targetPos.copy(playerPos).add(_followOffset);
+    const distToTarget = abhi.position.distanceTo(_targetPos);
 
     if (distToTarget > 15) {
       // Teleport together with Sneha
-      abhi.position.copy(targetPos);
+      abhi.position.copy(_targetPos);
     } else if (distToTarget > 0.3) {
       // Smoothly walk towards target position
       isWalkingRef.current = true;
       const moveSpeed = Math.min(distToTarget * 4, 7.5);
-      const dir = targetPos.clone().sub(abhi.position).normalize();
-      abhi.position.addScaledVector(dir, moveSpeed * delta);
+      _dir.copy(_targetPos).sub(abhi.position).normalize();
+      abhi.position.addScaledVector(_dir, moveSpeed * delta);
 
       // Rotate Abhi to face movement direction or face Sneha
-      const lookTarget = playerPos.clone();
-      lookTarget.y = abhi.position.y;
-      abhi.lookAt(lookTarget);
+      _lookTarget.copy(playerPos);
+      _lookTarget.y = abhi.position.y;
+      abhi.lookAt(_lookTarget);
 
       bobRef.current += delta * 10;
     } else {
       isWalkingRef.current = false;
       // When stopped, always look directly at Sneha with love
-      const lookTarget = playerPos.clone();
-      lookTarget.y = abhi.position.y;
-      abhi.lookAt(lookTarget);
+      _lookTarget.copy(playerPos);
+      _lookTarget.y = abhi.position.y;
+      abhi.lookAt(_lookTarget);
       bobRef.current += delta * 1.5;
     }
 

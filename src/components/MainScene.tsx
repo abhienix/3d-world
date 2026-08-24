@@ -4,6 +4,7 @@
 
 import { Suspense, useRef, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
+import { AdaptiveDpr, AdaptiveEvents } from '@react-three/drei';
 import * as THREE from 'three';
 import { useGameStore } from '../stores/gameStore';
 import { WorldLayout } from './world/WorldLayout';
@@ -137,49 +138,10 @@ function SceneInner() {
       <Suspense fallback={null}>
         <PrissiAndGunnuJhula />
       </Suspense>
-    </>
-  );
-}
 
-// ── Vibrant glamour lighting ─────────────────────────────────
-
-function ImmediateLighting() {
-  return (
-    <>
-      {/* Warm pink ambient */}
-      <ambientLight color="#FFE4F0" intensity={0.85} />
-
-      {/* Main sun — golden hour warm */}
-      <directionalLight
-        color="#FFF5E0"
-        intensity={1.6}
-        position={[20, 30, 20]}
-        castShadow
-        shadow-mapSize-width={2048}
-        shadow-mapSize-height={2048}
-        shadow-camera-near={0.1}
-        shadow-camera-far={150}
-        shadow-camera-left={-70}
-        shadow-camera-right={70}
-        shadow-camera-top={70}
-        shadow-camera-bottom={-70}
-        shadow-bias={-0.001}
-      />
-
-      {/* Pink fill from the left */}
-      <directionalLight color="#FF80AB" intensity={0.5} position={[-15, 15, -5]} />
-
-      {/* Purple rim from behind */}
-      <directionalLight color="#CE93D8" intensity={0.4} position={[5, 10, -20]} />
-
-      {/* Golden shimmer from below */}
-      <directionalLight color="#FFD700" intensity={0.2} position={[0, -5, 0]} />
-
-      {/* Hemisphere: pink sky / green ground */}
-      <hemisphereLight args={['#FFB6C1', '#C8E6C9', 0.65]} />
-
-      {/* World-fill pink point */}
-      <pointLight position={[0, 8, 0]} color="#FF80AB" intensity={1.5} distance={60} decay={1.5} />
+      {/* ── Performance & Quality Adapters ── */}
+      <AdaptiveDpr pixelated={false} />
+      <AdaptiveEvents />
     </>
   );
 }
@@ -206,12 +168,14 @@ export function MainScene() {
       <AssetLoader />
       <Canvas
         shadows={{ type: THREE.PCFSoftShadowMap }}
-        dpr={[1, typeof window !== 'undefined' ? Math.min(window.devicePixelRatio, 2) : 1]}
-        performance={{ min: 0.6 }}
-        camera={{ fov: 62, near: 0.1, far: 300, position: [0, 5, 12] }}
+        dpr={[1, typeof window !== 'undefined' ? Math.min(window.devicePixelRatio, 1.8) : 1]}
+        performance={{ min: 0.5 }}
+        camera={{ fov: 60, near: 0.1, far: 280, position: [0, 5, 12] }}
         gl={{
           antialias: true,
           powerPreference: 'high-performance',
+          stencil: false,
+          depth: true,
           toneMapping: THREE.ACESFilmicToneMapping,
           toneMappingExposure: 1.2,
           outputColorSpace: THREE.SRGBColorSpace,

@@ -19,6 +19,11 @@ interface ThirdPersonCameraProps {
   targetRef: React.RefObject<THREE.Group | null>;
 }
 
+// Static scratch vectors for zero-allocation camera lerping
+const _camOffset = new THREE.Vector3();
+const _camDesiredPos = new THREE.Vector3();
+const _camLookTarget = new THREE.Vector3();
+
 export function ThirdPersonCamera({ targetRef }: ThirdPersonCameraProps) {
   const { camera } = useThree();
   const settings = useGameStore((s) => s.settings);
@@ -96,21 +101,21 @@ export function ThirdPersonCamera({ targetRef }: ThirdPersonCameraProps) {
     const height = photoModeActive ? 1.6 : CAMERA_HEIGHT;
 
     // Spherical camera offset
-    const offset = new THREE.Vector3(
+    _camOffset.set(
       Math.sin(yaw.current) * Math.cos(pitch.current) * distance,
       Math.sin(pitch.current) * distance + height,
       Math.cos(yaw.current) * Math.cos(pitch.current) * distance
     );
 
-    const desiredPos = target.clone().add(offset);
+    _camDesiredPos.copy(target).add(_camOffset);
 
     // Smooth camera movement
     const t = 1 - Math.pow(CAMERA_SMOOTHING, delta);
-    smoothedPos.current.lerp(desiredPos, t);
-    smoothedTarget.current.lerp(
-      target.clone().add(new THREE.Vector3(0, photoModeActive ? 1.4 : 1.4, 0)),
-      t
-    );
+    smoothedPos.current.lerp(_camDesiredPos, t);
+
+    _camLookTarget.copy(target);
+    _camLookTarget.y += 1.4;
+    smoothedTarget.current.lerp(_camLookTarget, t);
 
     camera.position.copy(smoothedPos.current);
     camera.lookAt(smoothedTarget.current);
