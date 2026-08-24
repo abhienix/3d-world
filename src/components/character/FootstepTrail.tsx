@@ -111,12 +111,12 @@ export function FootstepTrail({ playerRef }: FootstepTrailProps) {
   });
 
   return (
-    <instancedMesh ref={meshRef} args={[undefined, undefined, MAX_PARTICLES]}>
-      <octahedronGeometry args={[0.3, 0]} />
+    <instancedMesh ref={meshRef} args={[undefined, undefined, MAX_PARTICLES]} frustumCulled={false}>
+      <octahedronGeometry args={[0.18, 0]} />
       <meshStandardMaterial
-        color="#FF80AB"
-        emissive="#FF1493"
-        emissiveIntensity={1.2}
+        color="#FF1493"
+        emissive="#FF80AB"
+        emissiveIntensity={2.5}
         roughness={0.1}
         metalness={0.8}
         transparent

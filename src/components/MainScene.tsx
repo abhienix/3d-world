@@ -181,12 +181,15 @@ export function MainScene() {
     <>
       <AssetLoader />
       <Canvas
-        shadows={{ type: THREE.PCFShadowMap }}
-        camera={{ fov: 65, near: 0.1, far: 280, position: [0, 5, 12] }}
+        shadows={{ type: THREE.PCFSoftShadowMap }}
+        dpr={[1, typeof window !== 'undefined' ? Math.min(window.devicePixelRatio, 2) : 1]}
+        performance={{ min: 0.6 }}
+        camera={{ fov: 62, near: 0.1, far: 300, position: [0, 5, 12] }}
         gl={{
           antialias: true,
+          powerPreference: 'high-performance',
           toneMapping: THREE.ACESFilmicToneMapping,
-          toneMappingExposure: 1.15,
+          toneMappingExposure: 1.2,
           outputColorSpace: THREE.SRGBColorSpace,
         }}
         style={{ position: 'fixed', inset: 0 }}

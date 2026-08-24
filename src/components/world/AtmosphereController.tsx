@@ -14,9 +14,10 @@ export function AtmosphereController() {
 
   return (
     <>
-      {/* ── Sky & Atmosphere Dome ── */}
+      {/* ── Sky & Atmosphere Dome & Volumetric Fog ── */}
       {timeOfDay === 'night' ? (
         <>
+          <fog attach="fog" args={['#0A0216', 30, 160]} />
           <mesh>
             <sphereGeometry args={[220, 24, 24]} />
             <meshBasicMaterial color="#0A0216" side={THREE.BackSide} />
@@ -50,6 +51,7 @@ export function AtmosphereController() {
         </>
       ) : timeOfDay === 'day' ? (
         <>
+          <fog attach="fog" args={['#FCE4EC', 45, 220]} />
           <mesh>
             <sphereGeometry args={[220, 24, 24]} />
             <meshBasicMaterial color="#81D4FA" side={THREE.BackSide} />
@@ -82,6 +84,7 @@ export function AtmosphereController() {
       ) : (
         /* Sunset Mood 🌅 */
         <>
+          <fog attach="fog" args={['#4A0E2E', 35, 180]} />
           <mesh>
             <sphereGeometry args={[220, 24, 24]} />
             <meshBasicMaterial color="#D81B60" side={THREE.BackSide} />
