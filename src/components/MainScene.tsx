@@ -25,6 +25,7 @@ import { GiantFerrisWheel } from './world/GiantFerrisWheel';
 import { WorldCollectibles } from './world/WorldCollectibles';
 import { SnehaLandAttractions } from './world/SnehaLandAttractions';
 import { AsansolCityExpansion } from './world/AsansolCityExpansion';
+import { AsansolLocalSpots } from './world/AsansolLocalSpots';
 
 // ── Asset loading simulator ──────────────────────────────────
 
@@ -124,6 +125,11 @@ function SceneInner() {
       {/* ── Asansol & Kulti City (Sentrum Mall, Fern Residency, Airport, Railway Jn, Zudio) ── */}
       <Suspense fallback={null}>
         <AsansolCityExpansion />
+      </Suspense>
+
+      {/* ── Category A: Maithon Dam, Phuchka Stall, Mishti Mukh, Festive Puja Pandal ── */}
+      <Suspense fallback={null}>
+        <AsansolLocalSpots />
       </Suspense>
     </>
   );
