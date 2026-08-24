@@ -24,6 +24,7 @@ import { LoveCafe } from './world/LoveCafe';
 import { GiantFerrisWheel } from './world/GiantFerrisWheel';
 import { WorldCollectibles } from './world/WorldCollectibles';
 import { SnehaLandAttractions } from './world/SnehaLandAttractions';
+import { AsansolCityExpansion } from './world/AsansolCityExpansion';
 
 // ── Asset loading simulator ──────────────────────────────────
 
@@ -118,6 +119,11 @@ function SceneInner() {
       {/* ── Snehaland Disneyland Theme Park Stalls & Carousel ── */}
       <Suspense fallback={null}>
         <SnehaLandAttractions />
+      </Suspense>
+
+      {/* ── Asansol & Kulti City (Sentrum Mall, Fern Residency, Airport, Railway Jn, Zudio) ── */}
+      <Suspense fallback={null}>
+        <AsansolCityExpansion />
       </Suspense>
     </>
   );
