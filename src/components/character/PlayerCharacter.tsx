@@ -95,7 +95,8 @@ export function PlayerCharacter({ playerRef }: PlayerCharacterProps) {
     }
 
     player.position.addScaledVector(velRef.current, delta);
-    if (player.position.y < 0) player.position.y = 0;
+    const groundY = player.position.y > 20 ? 45.0 : 0;
+    if (player.position.y < groundY) player.position.y = groundY;
   });
 
   return (

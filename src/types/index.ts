@@ -27,18 +27,22 @@ export interface Collectible {
 export interface OutfitPart {
   id: string;
   label: string;
-  modelUrl?: string; // GLB for this part
+  modelUrl?: string;
   thumbnail?: string;
 }
 
 export interface Outfit {
   id: string;
   name: string;
-  hair: OutfitPart;
-  top: OutfitPart;
-  bottom: OutfitPart;
-  shoes: OutfitPart;
-  accessories: OutfitPart[];
+  description?: string;
+  previewColor?: string;
+  unlocked?: boolean;
+  parts?: OutfitPart[];
+  hair?: OutfitPart;
+  top?: OutfitPart;
+  bottom?: OutfitPart;
+  shoes?: OutfitPart;
+  accessories?: OutfitPart[];
   thumbnail?: string;
 }
 
@@ -51,17 +55,24 @@ export interface InteractionData {
     | 'message'
     | 'music'
     | 'photo'
-    | 'portal';
+    | 'portal'
+    | 'custom';
   payload?: unknown;
   label?: string;
   prompt?: string;
+  title?: string;
+  memoryId?: string;
+  targetPosition?: [number, number, number];
 }
 
 export interface WorldArea {
   id: string;
   name: string;
+  description?: string;
   unlocked: boolean;
-  position: [number, number, number];
+  position?: [number, number, number];
+  centerPosition?: [number, number, number];
+  radius?: number;
 }
 
 export interface GameProgress {

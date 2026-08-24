@@ -19,6 +19,10 @@ import { ThirdPersonCamera } from './camera/ThirdPersonCamera';
 import { InteractionManager } from './interaction/InteractiveObject';
 import { AtmosphereController } from './world/AtmosphereController';
 import { FireworksShow } from './world/FireworksShow';
+import { SkySanctuary } from './world/SkySanctuary';
+import { LoveCafe } from './world/LoveCafe';
+import { GiantFerrisWheel } from './world/GiantFerrisWheel';
+import { WorldCollectibles } from './world/WorldCollectibles';
 
 // ── Asset loading simulator ──────────────────────────────────
 
@@ -91,6 +95,24 @@ function SceneInner() {
       <Suspense fallback={null}>
         <BarbieWorldExtras />
       </Suspense>
+
+      {/* ── Floating Sky Sanctuary (Secret Cloud Island) ── */}
+      <Suspense fallback={null}>
+        <SkySanctuary />
+      </Suspense>
+
+      {/* ── Café de Sneha ♡ ── */}
+      <Suspense fallback={null}>
+        <LoveCafe />
+      </Suspense>
+
+      {/* ── Giant Love Wonder Wheel ── */}
+      <Suspense fallback={null}>
+        <GiantFerrisWheel />
+      </Suspense>
+
+      {/* ── Glowing World Collectible Gems ── */}
+      <WorldCollectibles />
     </>
   );
 }

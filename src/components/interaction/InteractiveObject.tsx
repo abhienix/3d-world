@@ -20,7 +20,7 @@ interface InteractiveObjectProps {
   data: InteractionData;
   position: [number, number, number];
   radius?: number;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 export function InteractiveObject({
@@ -99,7 +99,11 @@ export function InteractionManager({ playerRef }: InteractionManagerProps) {
       interactPressed.current = false;
       const entry = interactableRegistry.get(closestId);
       if (entry) {
-        setActiveInteraction({ data: entry.data, objectId: closestId });
+        if (entry.data.targetPosition && playerRef.current) {
+          playerRef.current.position.set(...entry.data.targetPosition);
+        } else {
+          setActiveInteraction({ data: entry.data, objectId: closestId });
+        }
       }
     }
   });

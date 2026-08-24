@@ -1,7 +1,5 @@
 // ============================================================
 // SNEHA WORLD — Central Personalization Data File
-//
-// ✏️ EDIT THIS FILE to personalize the entire experience.
 // ============================================================
 
 import type { SnehaProfile, Memory, Collectible, Outfit, WorldArea } from '../types';
@@ -9,25 +7,34 @@ import type { SnehaProfile, Memory, Collectible, Outfit, WorldArea } from '../ty
 // ── Profile ─────────────────────────────────────────────────
 export const snehaProfile: SnehaProfile = {
   name: 'Sneha',
-  nickname: undefined,
-  favoriteColors: ['#FF80AB', '#C8A2C8', '#FFD700', '#E53935', '#1A237E'],
+  nickname: 'Queen',
+  favoriteColors: ['#FF1493', '#FF80AB', '#FFD700', '#CE93D8', '#E53935'],
   favoriteThings: [
     'Rangoli',
     'Sarees',
     'Festive celebrations',
     'Nature & riversides',
     'Traditional art',
+    'Barbie Aesthetics',
   ],
-  favoriteFlower: 'Marigold',
-  favoriteFood: undefined,
-  hobbies: ['Rangoli', 'Fashion', 'Travel', 'Celebrations'],
-  accentColor: '#FF80AB',
-  secondaryColor: '#CE93D8',
+  favoriteFlower: 'Marigold & Pink Rose',
+  favoriteFood: 'Sweets & Boba',
+  hobbies: ['Rangoli', 'Fashion', 'Travel', 'Celebrations', 'Photography'],
+  accentColor: '#FF1493',
+  secondaryColor: '#FFD700',
 
-  // ✏️ FINAL MESSAGE — Replace with your personal message.
-  finalMessage: `FINAL_MESSAGE_PLACEHOLDER
+  finalMessage: `My Dearest Sneha,
 
-— Replace this text in src/data/sneha.ts → finalMessage`,
+You are my home, my peace, and the most beautiful dream I could ever ask for.
+From the very first day we met on 18-06-25, you brought magic, laughter, and endless warmth into my world.
+
+Every smile of yours is my favorite work of art.
+Every moment with you is a memory I will cherish forever and always.
+
+You are the queen of my heart, the prettiest girl in the universe, and my forever love.
+
+Forever & Always Yours,
+Abhi ♡`,
 };
 
 // ── Memories ─────────────────────────────────────────────────
@@ -41,139 +48,150 @@ export const memories: Memory[] = [
     photoUrl: '/photos/memory_01.jpg',
     videoUrl: undefined,
     discovered: false,
-    position: [5, 0, 8],
+    position: [0, 0, 18],
   },
   {
     id: 'memory-02',
     title: 'The Rangoli Artist',
-    date: undefined,
+    date: 'Diwali Glow',
     message:
       'Look at her. Surrounded by color, light and diyas — the most beautiful artwork being the one who made it. She creates beauty wherever she goes.',
     photoUrl: '/photos/memory_02.jpg',
     videoUrl: undefined,
     discovered: false,
-    position: [-7, 0, 12],
+    position: [-14, 0, -5],
   },
   {
     id: 'memory-03',
     title: 'Golden Day',
-    date: undefined,
+    date: 'Sunshine Smile',
     message:
       'Yellow suits her. She was glowing brighter than the sun that day. That smile — it\'s the kind that stays with you long after the photo ends.',
     photoUrl: '/photos/memory_03.jpg',
     videoUrl: undefined,
     discovered: false,
-    position: [10, 0, -5],
+    position: [14, 0, -5],
   },
   {
     id: 'memory-04',
     title: 'The Celebrations',
-    date: undefined,
+    date: 'Royal Elegance',
     message:
       'There she is — dressed in gold and red, adorned in flowers, absolutely radiant. She makes every celebration more beautiful just by being in it.',
     photoUrl: '/photos/memory_04.jpg',
     videoUrl: undefined,
     discovered: false,
-    position: [-5, 0, -10],
+    position: [-8, 0, -22],
   },
   {
     id: 'memory-05',
     title: 'By the River',
-    date: undefined,
+    date: 'Serene Breeze',
     message:
       'Wind in her hair, a soft smile, the river behind her. This is the kind of moment you want to keep forever. So here it is — kept forever.',
     photoUrl: '/photos/memory_05.jpg',
     videoUrl: undefined,
     discovered: false,
-    position: [8, 0, 15],
+    position: [-20, 0, -3],
   },
 ];
 
 // ── Collectibles ─────────────────────────────────────────────
 export const collectibles: Collectible[] = [
-  { id: 'c-01', name: 'Pink Heart',   type: 'heart',  position: [3, 0.5, 3],    collected: false },
-  { id: 'c-02', name: 'Gold Star',    type: 'star',   position: [-4, 0.5, 2],   collected: false },
-  { id: 'c-03', name: 'Pink Bow',     type: 'bow',    position: [0, 0.5, -5],   collected: false },
-  { id: 'c-04', name: 'Marigold',     type: 'flower', position: [6, 0.5, -2],   collected: false },
-  { id: 'c-05', name: 'Gift Box',     type: 'gift',   position: [-3, 0.5, -8],  collected: false },
-  { id: 'c-06', name: 'Little Diya',  type: 'custom', position: [-6, 0.5, 6],   collected: false },
-  { id: 'c-07', name: 'Paper Heart',  type: 'heart',  position: [9, 0.5, 1],    collected: false },
-  { id: 'c-08', name: 'Gold Bangle',  type: 'custom', position: [-9, 0.5, -4],  collected: false },
+  { id: 'c-01', name: 'Pink Diamond Heart', type: 'heart',  position: [0, 1.2, 5],     collected: false },
+  { id: 'c-02', name: 'Golden Tiara Gem',   type: 'star',   position: [-18, 1.2, 0],   collected: false },
+  { id: 'c-03', name: 'Sparkling Rose',     type: 'flower', position: [-22, 1.2, 15],  collected: false },
+  { id: 'c-04', name: 'Carousel Gold Star', type: 'star',   position: [22, 1.2, 15],   collected: false },
+  { id: 'c-05', name: 'Dreamhouse Key',     type: 'gift',   position: [0, 1.2, -26],   collected: false },
+  { id: 'c-06', name: 'Romantic Diya',      type: 'custom', position: [0, 1.2, 40],    collected: false },
+  { id: 'c-07', name: 'Love Convertible Gem', type: 'heart', position: [15, 1.2, -20], collected: false },
+  { id: 'c-08', name: 'Sky Sanctuary Crystal', type: 'heart', position: [0, 46.2, 0],   collected: false },
 ];
 
-// ── Outfits ───────────────────────────────────────────────────
+// ── Outfits ──────────────────────────────────────────────────
 export const outfits: Outfit[] = [
   {
-    id: 'outfit-saree',
-    name: 'Silk Saree',
-    hair: { id: 'hair-long', label: 'Long Flowing' },
-    top:  { id: 'top-saree-blouse', label: 'Gold Blouse' },
-    bottom: { id: 'bottom-saree', label: 'Navy Silk Saree' },
-    shoes: { id: 'shoes-heels', label: 'Gold Heels' },
-    accessories: [
-      { id: 'acc-earrings', label: 'Jhumka Earrings' },
-      { id: 'acc-bangle',   label: 'Gold Bangles' },
-      { id: 'acc-bindi',    label: 'Red Bindi' },
-    ],
+    id: 'outfit-barbie-gown',
+    name: 'Barbie Royal Princess Ballgown',
+    description: 'Hot pink cascading gown with golden lace borders and sparkling diamond tiara.',
+    previewColor: '#FF1493',
+    unlocked: true,
+    parts: [],
   },
   {
-    id: 'outfit-kurta',
-    name: 'Yellow Kurta',
-    hair: { id: 'hair-long-loose', label: 'Loose & Flowing' },
-    top:  { id: 'top-kurta', label: 'Yellow Floral Kurta' },
-    bottom: { id: 'bottom-kurta', label: 'Palazzo' },
-    shoes: { id: 'shoes-flats', label: 'Flats' },
-    accessories: [
-      { id: 'acc-stud',  label: 'Pearl Studs' },
-      { id: 'acc-bindi', label: 'Red Bindi' },
-      { id: 'acc-nath',  label: 'Small Nose Ring' },
-    ],
+    id: 'outfit-silk-saree',
+    name: 'Navy Silk Diwali Saree',
+    description: 'Rich royal blue silk saree with gold zari border and traditional jhumkas.',
+    previewColor: '#1A237E',
+    unlocked: true,
+    parts: [],
   },
   {
-    id: 'outfit-festive',
-    name: 'Festive Lehenga',
-    hair: { id: 'hair-braid', label: 'Floral Braid' },
-    top:  { id: 'top-lehenga', label: 'Peach & Red Embroidered Blouse' },
-    bottom: { id: 'bottom-lehenga', label: 'Embroidered Skirt' },
-    shoes: { id: 'shoes-heels', label: 'Embellished Heels' },
-    accessories: [
-      { id: 'acc-maangtikka', label: 'Maang Tikka' },
-      { id: 'acc-chaandbali', label: 'Chaandbali Earrings' },
-      { id: 'acc-necklace',   label: 'Gold Necklace' },
-      { id: 'acc-flowers',    label: 'Hair Flowers' },
-    ],
+    id: 'outfit-festive-lehenga',
+    name: 'Peach & Gold Celebration Lehenga',
+    description: 'Embroidered festive lehenga with maang tikka and chandelier earrings.',
+    previewColor: '#FFA07A',
+    unlocked: true,
+    parts: [],
   },
   {
-    id: 'outfit-casual',
-    name: 'Casual White',
-    hair: { id: 'hair-wavy', label: 'Wavy & Free' },
-    top:  { id: 'top-white', label: 'White Top' },
-    bottom: { id: 'bottom-black', label: 'Black Jeans' },
-    shoes: { id: 'shoes-sneakers', label: 'White Sneakers' },
-    accessories: [
-      { id: 'acc-bangle-gold', label: 'Gold Bracelet' },
-      { id: 'acc-ring',        label: 'Delicate Ring' },
-    ],
+    id: 'outfit-yellow-kurta',
+    name: 'Sunshine Floral Kurta',
+    description: 'Bright yellow floral kurta with delicate red bindi and golden bangles.',
+    previewColor: '#FFD700',
+    unlocked: true,
+    parts: [],
   },
 ];
 
-// ── World Areas ───────────────────────────────────────────────
+// ── World Areas ──────────────────────────────────────────────
 export const worldAreas: WorldArea[] = [
-  { id: 'plaza',        name: 'Main Plaza',       unlocked: true,  position: [0, 0, 0] },
-  { id: 'dreamhouse',   name: 'Dreamhouse',        unlocked: true,  position: [0, 0, -20] },
-  { id: 'garden',       name: 'Memory Garden',     unlocked: true,  position: [0, 0, 25] },
-  { id: 'dressing',     name: 'Dressing Room',     unlocked: true,  position: [-18, 0, 0] },
-  { id: 'collectibles', name: 'Collectible Area',  unlocked: true,  position: [18, 0, 0] },
-  { id: 'secret',       name: 'Secret Area',       unlocked: false, position: [0, 0, -50] },
-];
-
-// ── Special Dates ──────────────────────────────────────────────
-// Used by the constellation/star memory system
-export const specialDates = [
   {
-    id: 'date-start',
-    date: '18 June 2025',
-    label: 'The Beginning',
-    message: 'The day two strangers became each other\'s home.',
+    id: 'plaza',
+    name: 'Grand Barbie Plaza',
+    description: 'The glowing heart of Sneha World with fountains, photo billboards, and love banners.',
+    centerPosition: [0, 0, 0],
+    radius: 12,
+    unlocked: true,
+  },
+  {
+    id: 'dreamhouse',
+    name: 'Sneha\'s Dream Home',
+    description: 'A 2-story pink Barbie mansion with royal bedroom, vanity table, and private gardens.',
+    centerPosition: [0, 0, -28],
+    radius: 18,
+    unlocked: true,
+  },
+  {
+    id: 'garden',
+    name: 'Anniversary Memory Garden',
+    description: 'Glowing flower blooms holding real photographic memories of your journey.',
+    centerPosition: [0, 0, 22],
+    radius: 14,
+    unlocked: true,
+  },
+  {
+    id: 'statue',
+    name: 'Sneha Monument & Pool',
+    description: 'The grand golden statue honoring the most beautiful girl in the world and pink heart pool.',
+    centerPosition: [-18, 0, -5],
+    radius: 15,
+    unlocked: true,
+  },
+  {
+    id: 'cafe',
+    name: 'Café de Sneha ♡',
+    description: 'A cute outdoor Parisian Barbie cafe serving strawberry cakes, macarons, and love lattes.',
+    centerPosition: [-25, 0, -22],
+    radius: 12,
+    unlocked: true,
+  },
+  {
+    id: 'skysanctuary',
+    name: 'Floating Sky Sanctuary',
+    description: 'A secret celestial cloud island with glowing waterfalls, giant crystal heart, and love letter.',
+    centerPosition: [0, 45, 0],
+    radius: 20,
+    unlocked: true,
   },
 ];

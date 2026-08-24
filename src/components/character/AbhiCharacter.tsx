@@ -61,7 +61,10 @@ export function AbhiCharacter({ playerRef }: AbhiCharacterProps) {
     const targetPos = playerPos.clone().add(followOffset);
     const distToTarget = abhi.position.distanceTo(targetPos);
 
-    if (distToTarget > 0.3) {
+    if (distToTarget > 15) {
+      // Teleport together with Sneha
+      abhi.position.copy(targetPos);
+    } else if (distToTarget > 0.3) {
       // Smoothly walk towards target position
       isWalkingRef.current = true;
       const moveSpeed = Math.min(distToTarget * 4, 7.5);
