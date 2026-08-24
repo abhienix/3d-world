@@ -23,6 +23,7 @@ import { SkySanctuary } from './world/SkySanctuary';
 import { LoveCafe } from './world/LoveCafe';
 import { GiantFerrisWheel } from './world/GiantFerrisWheel';
 import { WorldCollectibles } from './world/WorldCollectibles';
+import { SnehaLandAttractions } from './world/SnehaLandAttractions';
 
 // ── Asset loading simulator ──────────────────────────────────
 
@@ -113,6 +114,11 @@ function SceneInner() {
 
       {/* ── Glowing World Collectible Gems ── */}
       <WorldCollectibles />
+
+      {/* ── Snehaland Disneyland Theme Park Stalls & Carousel ── */}
+      <Suspense fallback={null}>
+        <SnehaLandAttractions />
+      </Suspense>
     </>
   );
 }
