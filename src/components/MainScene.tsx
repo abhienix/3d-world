@@ -1,10 +1,10 @@
 // ============================================================
 // SNEHA WORLD — Main 3D Scene (Full Barbie World)
+// Robust WebGL & Mobile-Ready Canvas Setup
 // ============================================================
 
 import { Suspense, useRef, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { AdaptiveDpr, AdaptiveEvents } from '@react-three/drei';
 import * as THREE from 'three';
 import { useGameStore } from '../stores/gameStore';
 import { WorldLayout } from './world/WorldLayout';
@@ -34,17 +34,17 @@ import { PrissiAndGunnuJhula } from './world/PrissiAndGunnuJhula';
 function AssetLoader() {
   const setLoadingProgress = useGameStore((s) => s.setLoadingProgress);
   useEffect(() => {
-    let progress = 10;
-    setLoadingProgress(10);
+    let progress = 15;
+    setLoadingProgress(15);
     const interval = setInterval(() => {
-      progress += Math.floor(Math.random() * 20 + 15);
+      progress += Math.floor(Math.random() * 25 + 15);
       if (progress >= 100) {
         setLoadingProgress(100);
         clearInterval(interval);
       } else {
         setLoadingProgress(progress);
       }
-    }, 150);
+    }, 120);
     return () => clearInterval(interval);
   }, [setLoadingProgress]);
   return null;
@@ -76,25 +76,23 @@ function SceneInner() {
         <WorldLayout />
       </Suspense>
 
-      {/* ── Main Plaza ── */}
+      {/* ── Main Plaza — stage, fountain, pedestals ── */}
       <Suspense fallback={null}>
         <MainPlaza />
       </Suspense>
 
-      {/* ── Sneha's Dreamhouse (north) ── */}
+      {/* ── Dream House — mansion, balcony, pool ── */}
       <Suspense fallback={null}>
         <DreamHouse />
       </Suspense>
 
-      {/* ── Memory Garden (south) ── */}
+      {/* ── Memory Garden — gazebos, statues, trees ── */}
       <Suspense fallback={null}>
         <MemoryGarden />
       </Suspense>
 
-      {/* ── Photo Banners / Billboards ── */}
-      <Suspense fallback={null}>
-        <PhotoBanners />
-      </Suspense>
+      {/* ── Photo Billboards & Banners ── */}
+      <PhotoBanners />
 
       {/* ── Full Barbie World extras ── */}
       <Suspense fallback={null}>
@@ -138,15 +136,11 @@ function SceneInner() {
       <Suspense fallback={null}>
         <PrissiAndGunnuJhula />
       </Suspense>
-
-      {/* ── Performance & Quality Adapters ── */}
-      <AdaptiveDpr pixelated={false} />
-      <AdaptiveEvents />
     </>
   );
 }
 
-// ── Vibrant ground + sky backdrop ────────────────────────────
+// ── Vibrant ground backdrop ──────────────────────────────────
 
 function ImmediateGround() {
   return (
@@ -167,20 +161,19 @@ export function MainScene() {
     <>
       <AssetLoader />
       <Canvas
-        shadows={{ type: THREE.PCFSoftShadowMap }}
+        shadows
         dpr={[1, typeof window !== 'undefined' ? Math.min(window.devicePixelRatio, 1.8) : 1]}
-        performance={{ min: 0.5 }}
         camera={{ fov: 60, near: 0.1, far: 280, position: [0, 5, 12] }}
         gl={{
           antialias: true,
           powerPreference: 'high-performance',
-          stencil: false,
-          depth: true,
           toneMapping: THREE.ACESFilmicToneMapping,
           toneMappingExposure: 1.2,
-          outputColorSpace: THREE.SRGBColorSpace,
         }}
-        style={{ position: 'fixed', inset: 0 }}
+        onCreated={({ gl }) => {
+          gl.shadowMap.type = THREE.PCFSoftShadowMap;
+        }}
+        style={{ position: 'fixed', inset: 0, touchAction: 'none' }}
       >
         <SceneInner />
       </Canvas>

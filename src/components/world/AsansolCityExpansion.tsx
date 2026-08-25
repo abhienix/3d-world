@@ -18,7 +18,9 @@ export function AsansolCityExpansion() {
   return (
     <group name="asansol-city">
       {/* ── 1. Kulti Ki Rani Giant Billboard ── */}
-      <KultiKiRaniBillboard position={[-8, 0, 28]} rotation={[0, Math.PI, 0]} />
+      <React.Suspense fallback={null}>
+        <KultiKiRaniBillboard position={[-8, 0, 28]} rotation={[0, Math.PI, 0]} />
+      </React.Suspense>
 
       {/* ── 2. Sentrum Mall (North-West City Avenue) ── */}
       <SentrumMall position={[-38, 0, -48]} rotation={[0, Math.PI / 6, 0]} />

@@ -33,7 +33,7 @@ function InteractionDispatcher() {
 
 function App() {
   return (
-    <div style={{ width: '100vw', height: '100vh', overflow: 'hidden', background: '#1a0a2e' }}>
+    <div style={{ width: '100vw', height: '100dvh', position: 'fixed', inset: 0, overflow: 'hidden', background: '#1a0a2e', touchAction: 'none' }}>
       {/* 3D Canvas */}
       <MainScene />
 

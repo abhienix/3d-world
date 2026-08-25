@@ -27,7 +27,7 @@ export function LoadingScreen() {
     if (loadingProgress >= 100 && phase === 'loading') {
       autoEnterTimer.current = window.setTimeout(() => {
         handleEnter();
-      }, 1000);
+      }, 400);
     }
     return () => {
       if (autoEnterTimer.current) clearTimeout(autoEnterTimer.current);
@@ -41,8 +41,8 @@ export function LoadingScreen() {
           key="loading"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.8, ease: 'easeInOut' }}
-          onClick={loadingProgress >= 100 ? handleEnter : undefined}
+          transition={{ duration: 0.5, ease: 'easeInOut' }}
+          onClick={handleEnter}
           style={{
             position: 'fixed',
             inset: 0,
