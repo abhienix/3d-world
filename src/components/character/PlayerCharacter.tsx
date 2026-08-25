@@ -36,7 +36,7 @@ interface PlayerCharacterProps {
 export function PlayerCharacter({ playerRef }: PlayerCharacterProps) {
   const keys      = useKeyboard();
   const phase     = useGameStore((s) => s.phase);
-  const rotRef    = useRef(0);
+  const rotRef    = useRef(Math.PI);
   const bobRef    = useRef(0);
   const velRef    = useRef(new THREE.Vector3());
   const movingRef = useRef(false);
@@ -102,7 +102,7 @@ export function PlayerCharacter({ playerRef }: PlayerCharacterProps) {
   });
 
   return (
-    <group ref={playerRef} position={[0, 0, 5]}>
+    <group ref={playerRef} position={[0, 0, 5]} rotation={[0, Math.PI, 0]}>
       {/* Floating Overhead Name Tag */}
       <OverheadNameTag />
 

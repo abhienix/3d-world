@@ -1,39 +1,32 @@
 // ============================================================
-// SNEHA WORLD — Dynamic Atmosphere & Sky Controller
-// Switches between Day ☀️, Sunset 🌅, and Starry Night 🌌 moods.
+// SNEHA WORLD — Atmosphere & Dynamic Day/Sunset/Night Lighting
+// Clean, crystal-clear 3D lighting with crisp shadows and depth
 // ============================================================
 
-import React, { useRef } from 'react';
+import { useRef, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { Stars } from '@react-three/drei';
-import { useGameStore } from '../../stores/gameStore';
 import * as THREE from 'three';
+import { useGameStore } from '../../stores/gameStore';
 
 export function AtmosphereController() {
   const timeOfDay = useGameStore((s) => s.timeOfDay);
 
   return (
     <>
-      {/* ── Sky & Atmosphere Dome & Volumetric Fog ── */}
+      {/* ── Environment Lighting per Time of Day ── */}
       {timeOfDay === 'night' ? (
+        /* Night Mood 🌌 */
         <>
-          <fog attach="fog" args={['#0A0216', 30, 160]} />
-          <mesh>
-            <sphereGeometry args={[220, 24, 24]} />
-            <meshBasicMaterial color="#0A0216" side={THREE.BackSide} />
-          </mesh>
-          <mesh>
-            <sphereGeometry args={[190, 16, 16]} />
-            <meshBasicMaterial color="#210530" side={THREE.BackSide} transparent opacity={0.5} />
-          </mesh>
-          {/* Twinkling Stars in Night Mode */}
+          <fog attach="fog" args={['#0F0826', 80, 320]} />
+          <color attach="background" args={['#0F0826']} />
           <Stars radius={160} depth={50} count={1800} factor={4} saturation={0.8} fade speed={1} />
 
           {/* Moonlight & Purple Neon */}
-          <ambientLight color="#2E1B4E" intensity={0.75} />
+          <ambientLight color="#3A1C6E" intensity={0.65} />
           <directionalLight
-            color="#9C27B0"
-            intensity={1.2}
+            color="#B388FF"
+            intensity={1.0}
             position={[-15, 25, -15]}
             castShadow
             shadow-mapSize-width={1024}
@@ -46,60 +39,47 @@ export function AtmosphereController() {
             shadow-camera-bottom={-60}
             shadow-bias={-0.0005}
           />
-          <directionalLight color="#FF1493" intensity={0.8} position={[15, 12, 10]} />
-          <hemisphereLight args={['#3F51B5', '#1A0028', 0.6]} />
+          <directionalLight color="#FF4081" intensity={0.5} position={[15, 12, 10]} />
+          <hemisphereLight args={['#3F51B5', '#1A0028', 0.5]} />
         </>
       ) : timeOfDay === 'day' ? (
+        /* Sunny Golden Day ☀️ */
         <>
-          <fog attach="fog" args={['#FCE4EC', 45, 220]} />
-          <mesh>
-            <sphereGeometry args={[220, 24, 24]} />
-            <meshBasicMaterial color="#81D4FA" side={THREE.BackSide} />
-          </mesh>
-          <mesh>
-            <sphereGeometry args={[190, 16, 16]} />
-            <meshBasicMaterial color="#F8BBD0" side={THREE.BackSide} transparent opacity={0.4} />
-          </mesh>
+          <fog attach="fog" args={['#E8F5E9', 100, 380]} />
+          <color attach="background" args={['#B3E5FC']} />
 
           {/* Sunny Golden Day Lights */}
-          <ambientLight color="#FFF0F5" intensity={0.95} />
+          <ambientLight color="#FFFFFF" intensity={0.55} />
           <directionalLight
-            color="#FFFDE7"
-            intensity={1.9}
-            position={[25, 35, 20]}
+            color="#FFF9C4"
+            intensity={1.2}
+            position={[30, 45, 25]}
             castShadow
             shadow-mapSize-width={1024}
             shadow-mapSize-height={1024}
             shadow-camera-near={0.5}
-            shadow-camera-far={120}
-            shadow-camera-left={-60}
-            shadow-camera-right={60}
-            shadow-camera-top={60}
-            shadow-camera-bottom={-60}
+            shadow-camera-far={140}
+            shadow-camera-left={-70}
+            shadow-camera-right={70}
+            shadow-camera-top={70}
+            shadow-camera-bottom={-70}
             shadow-bias={-0.0005}
           />
-          <directionalLight color="#FF80AB" intensity={0.5} position={[-15, 15, -5]} />
-          <hemisphereLight args={['#E1F5FE', '#FCE4EC', 0.75]} />
+          <directionalLight color="#FFD180" intensity={0.35} position={[-20, 20, -10]} />
+          <hemisphereLight args={['#B3E5FC', '#A5D6A7', 0.55]} />
         </>
       ) : (
         /* Sunset Mood 🌅 */
         <>
-          <fog attach="fog" args={['#4A0E2E', 35, 180]} />
-          <mesh>
-            <sphereGeometry args={[220, 24, 24]} />
-            <meshBasicMaterial color="#D81B60" side={THREE.BackSide} />
-          </mesh>
-          <mesh>
-            <sphereGeometry args={[190, 16, 16]} />
-            <meshBasicMaterial color="#FFA726" side={THREE.BackSide} transparent opacity={0.45} />
-          </mesh>
+          <fog attach="fog" args={['#3E103F', 70, 300]} />
+          <color attach="background" args={['#5C1349']} />
           <Stars radius={160} depth={50} count={600} factor={2} saturation={0.5} fade speed={0.5} />
 
           {/* Warm Amber Sunset Lights */}
-          <ambientLight color="#FFE4F0" intensity={0.9} />
+          <ambientLight color="#FFD180" intensity={0.55} />
           <directionalLight
             color="#FF9800"
-            intensity={1.8}
+            intensity={1.1}
             position={[20, 18, 20]}
             castShadow
             shadow-mapSize-width={1024}
@@ -112,9 +92,8 @@ export function AtmosphereController() {
             shadow-camera-bottom={-60}
             shadow-bias={-0.0005}
           />
-          <directionalLight color="#FF4081" intensity={0.75} position={[-15, 12, -5]} />
-          <directionalLight color="#7B1FA2" intensity={0.45} position={[0, 8, -20]} />
-          <hemisphereLight args={['#FF80AB', '#FFE0B2', 0.7]} />
+          <directionalLight color="#FF4081" intensity={0.5} position={[-15, 12, -5]} />
+          <hemisphereLight args={['#FF80AB', '#FFE0B2', 0.5]} />
         </>
       )}
 
@@ -130,71 +109,72 @@ export function AtmosphereController() {
   );
 }
 
-function CloudPuff({
-  position,
-  scale = 1,
-}: {
-  position: [number, number, number];
-  scale?: number;
-}) {
-  const groupRef = useRef<THREE.Group>(null!);
-  const speed = 0.03 + Math.random() * 0.02;
+// ── Low-poly fluffy cloud puff ────────────────────────────────
 
-  useFrame((state) => {
-    if (groupRef.current) {
-      groupRef.current.position.x =
-        position[0] + Math.sin(state.clock.elapsedTime * speed) * 2;
+function CloudPuff({ position, scale = 1 }: { position: [number, number, number]; scale?: number }) {
+  const meshRef = useRef<THREE.Group>(null!);
+
+  useFrame((_, delta) => {
+    if (meshRef.current) {
+      meshRef.current.position.x += delta * 0.15;
+      if (meshRef.current.position.x > 80) {
+        meshRef.current.position.x = -80;
+      }
     }
   });
 
-  const blobs: [number, number, number, number][] = [
-    [0, 0, 0, 1],
-    [1.2, 0.3, 0.4, 0.85],
-    [-1.1, 0.2, 0.2, 0.8],
-    [0.5, 0.6, -0.3, 0.7],
-    [-0.4, 0.5, 0.5, 0.75],
-  ];
-
   return (
-    <group ref={groupRef} position={position} scale={scale}>
-      {blobs.map(([x, y, z, s], i) => (
-        <mesh key={i} position={[x, y, z]}>
-          <sphereGeometry args={[s, 7, 7]} />
-          <meshStandardMaterial
-            color="#FFFFFF"
-            roughness={1}
-            transparent
-            opacity={0.3}
-          />
-        </mesh>
-      ))}
+    <group ref={meshRef} position={position} scale={scale}>
+      <mesh position={[0, 0, 0]}>
+        <sphereGeometry args={[1.5, 8, 8]} />
+        <meshStandardMaterial color="#FFFFFF" roughness={0.9} transparent opacity={0.8} />
+      </mesh>
+      <mesh position={[1.2, -0.2, 0]}>
+        <sphereGeometry args={[1.1, 8, 8]} />
+        <meshStandardMaterial color="#FFFFFF" roughness={0.9} transparent opacity={0.8} />
+      </mesh>
+      <mesh position={[-1.2, -0.2, 0]}>
+        <sphereGeometry args={[1.1, 8, 8]} />
+        <meshStandardMaterial color="#FFFFFF" roughness={0.9} transparent opacity={0.8} />
+      </mesh>
     </group>
   );
 }
 
-const PARTICLE_COUNT = 45;
+// ── Floating magical particles ────────────────────────────────
 
 function FloatingParticles() {
+  const count = 35;
   const meshRef = useRef<THREE.InstancedMesh>(null!);
-  const dummy = new THREE.Object3D();
 
-  const particles = Array.from({ length: PARTICLE_COUNT }, () => ({
-    x: (Math.random() - 0.5) * 35,
-    y: Math.random() * 6 + 0.5,
-    z: (Math.random() - 0.5) * 35,
-    speed: 0.3 + Math.random() * 0.5,
-    phase: Math.random() * Math.PI * 2,
-    size: 0.02 + Math.random() * 0.03,
-  }));
+  const particles = useMemo(() => {
+    const temp: { x: number; y: number; z: number; speed: number; rotSpeed: number; scale: number }[] = [];
+    for (let i = 0; i < count; i++) {
+      temp.push({
+        x: (Math.random() - 0.5) * 70,
+        y: Math.random() * 8 + 0.5,
+        z: (Math.random() - 0.5) * 70,
+        speed: Math.random() * 0.4 + 0.2,
+        rotSpeed: Math.random() * 2 - 1,
+        scale: Math.random() * 0.15 + 0.08,
+      });
+    }
+    return temp;
+  }, []);
 
-  useFrame((state) => {
+  const dummy = useMemo(() => new THREE.Object3D(), []);
+
+  useFrame((state, delta) => {
     if (!meshRef.current) return;
     const t = state.clock.elapsedTime;
+
     particles.forEach((p, i) => {
-      const y = p.y + Math.sin(t * p.speed + p.phase) * 0.4;
-      const s = (0.5 + Math.sin(t * p.speed * 1.5 + p.phase) * 0.5) * p.size * 25;
-      dummy.position.set(p.x, y, p.z);
-      dummy.scale.setScalar(Math.max(0.001, s));
+      p.y += delta * p.speed;
+      if (p.y > 10) p.y = 0.5;
+
+      dummy.position.set(p.x + Math.sin(t * 0.8 + i) * 0.5, p.y, p.z + Math.cos(t * 0.8 + i) * 0.5);
+      dummy.rotation.set(t * p.rotSpeed, t * p.rotSpeed * 0.5, 0);
+      dummy.scale.setScalar(p.scale);
       dummy.updateMatrix();
       meshRef.current.setMatrixAt(i, dummy.matrix);
     });
@@ -202,14 +182,13 @@ function FloatingParticles() {
   });
 
   return (
-    <instancedMesh ref={meshRef} args={[undefined, undefined, PARTICLE_COUNT]}>
-      <sphereGeometry args={[0.04, 4, 4]} />
+    <instancedMesh ref={meshRef} args={[undefined, undefined, count]} frustumCulled={false}>
+      <octahedronGeometry args={[1, 0]} />
       <meshStandardMaterial
-        color="#FFB6C1"
+        color="#FFD700"
         emissive="#FF80AB"
-        emissiveIntensity={0.9}
-        transparent
-        opacity={0.8}
+        emissiveIntensity={0.6}
+        roughness={0.2}
       />
     </instancedMesh>
   );

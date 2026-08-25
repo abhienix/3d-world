@@ -145,10 +145,10 @@ function SceneInner() {
 function ImmediateGround() {
   return (
     <>
-      {/* Main world ground — Soft pastel green & cream meadow */}
+      {/* Main world ground — Lush Fairytale Green Meadow */}
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.12, 0]} receiveShadow>
         <planeGeometry args={[400, 400]} />
-        <meshStandardMaterial color="#E8EAE6" roughness={0.85} metalness={0} />
+        <meshStandardMaterial color="#5B8C51" roughness={0.9} metalness={0.05} />
       </mesh>
     </>
   );
@@ -168,7 +168,7 @@ export function MainScene() {
           antialias: true,
           powerPreference: 'high-performance',
           toneMapping: THREE.ACESFilmicToneMapping,
-          toneMappingExposure: 1.2,
+          toneMappingExposure: 1.0,
         }}
         onCreated={({ gl }) => {
           gl.shadowMap.type = THREE.PCFSoftShadowMap;
