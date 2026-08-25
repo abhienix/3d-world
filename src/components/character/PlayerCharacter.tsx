@@ -1,12 +1,12 @@
 // ============================================================
-// SNEHA WORLD — Player Character (Real Photo Face + Barbie Royal Ballgown)
-// Realistic photo-mapped likeness of Sneha with Barbie Doll ballgown,
-// golden princess tiara, jhumkas, and breathing/walking physics!
+// SNEHA WORLD — Player Character (Barbie Princess with Sneha Features)
+// Hand-crafted 3D sculpted facial likeness with Red Bindi, Golden Nose Ring (Nath),
+// Princess Tiara, Jhumkas, Silky Hair & Royal Barbie Ballgown!
 // ============================================================
 
 import React, { useRef, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { Text, useTexture } from '@react-three/drei';
+import { Text } from '@react-three/drei';
 import * as THREE from 'three';
 import { useKeyboard } from '../../hooks/useKeyboard';
 import { useGameStore } from '../../stores/gameStore';
@@ -16,15 +16,18 @@ const WALK_SPEED = 4.8;
 const RUN_SPEED  = 7.8;
 const ROT_SPEED  = 12.0;
 
-// Barbie Palette
+// Barbie Princess Palette
 const C_SKIN    = '#FDDEC0';
 const C_SKIN_LT = '#FFE6CC';
-const C_HAIR    = '#16100D';
+const C_BLUSH   = '#FF80AB';
+const C_HAIR    = '#1B1310';
 const C_DRESS_1 = '#FF1493'; // Iconic Barbie Hot Pink
 const C_DRESS_2 = '#FF80AB'; // Soft Pink Shimmer
 const C_GOLD    = '#FFD700'; // Royal Gold trim
 const C_TIARA   = '#FFE082';
 const C_GEM     = '#FF1493';
+const C_BINDI   = '#E53935';
+const C_LIP     = '#D81B60';
 
 interface PlayerCharacterProps {
   playerRef: React.RefObject<THREE.Group | null>;
@@ -39,19 +42,21 @@ export function PlayerCharacter({ playerRef }: PlayerCharacterProps) {
   const movingRef = useRef(false);
   const headRef   = useRef<THREE.Group>(null!);
 
-  // Load Sneha's Real Photo for Face Texture
-  const faceTexture = useTexture('/photos/memory_03.jpg');
-
   // Create materials once
   const mats = useMemo(() => ({
     skin:    new THREE.MeshStandardMaterial({ color: C_SKIN,    roughness: 0.55 }),
     skinLt:  new THREE.MeshStandardMaterial({ color: C_SKIN_LT, roughness: 0.55 }),
+    blush:   new THREE.MeshStandardMaterial({ color: C_BLUSH,   roughness: 0.8, transparent: true, opacity: 0.45 }),
     hair:    new THREE.MeshStandardMaterial({ color: C_HAIR,    roughness: 0.3, metalness: 0.1 }),
     dress1:  new THREE.MeshStandardMaterial({ color: C_DRESS_1, roughness: 0.2,  metalness: 0.25, emissive: C_DRESS_1, emissiveIntensity: 0.15 }),
     dress2:  new THREE.MeshStandardMaterial({ color: C_DRESS_2, roughness: 0.25, metalness: 0.15 }),
     gold:    new THREE.MeshStandardMaterial({ color: C_GOLD,    roughness: 0.15, metalness: 0.85, emissive: C_GOLD, emissiveIntensity: 0.25 }),
     tiara:   new THREE.MeshStandardMaterial({ color: C_TIARA,   roughness: 0.1,  metalness: 0.9, emissive: '#FFD700', emissiveIntensity: 0.4 }),
     gem:     new THREE.MeshStandardMaterial({ color: C_GEM,     roughness: 0.05, metalness: 0.3, emissive: C_GEM, emissiveIntensity: 0.8 }),
+    bindi:   new THREE.MeshStandardMaterial({ color: C_BINDI,   roughness: 0.4,  emissive: C_BINDI, emissiveIntensity: 0.5 }),
+    eyes:    new THREE.MeshStandardMaterial({ color: '#160B08', roughness: 0.15 }),
+    glint:   new THREE.MeshBasicMaterial({ color: '#FFFFFF' }),
+    lip:     new THREE.MeshStandardMaterial({ color: C_LIP,     roughness: 0.25, emissive: '#C2185B', emissiveIntensity: 0.2 }),
     shadow:  new THREE.MeshBasicMaterial({ color: '#000000', transparent: true, opacity: 0.22 }),
   }), []);
 
@@ -90,9 +95,9 @@ export function PlayerCharacter({ playerRef }: PlayerCharacterProps) {
 
     // Gentle realistic breathing and head tilt
     if (headRef.current) {
-      const breath = Math.sin(bobRef.current * 1.2) * 0.02;
+      const breath = Math.sin(bobRef.current * 1.2) * 0.015;
       headRef.current.position.y = 1.78 + breath;
-      headRef.current.rotation.z = Math.sin(bobRef.current * 0.8) * 0.03;
+      headRef.current.rotation.z = Math.sin(bobRef.current * 0.8) * 0.02;
     }
   });
 
@@ -106,7 +111,7 @@ export function PlayerCharacter({ playerRef }: PlayerCharacterProps) {
         <circleGeometry args={[0.55, 20]} />
       </mesh>
 
-      {/* ══ GORGEOUS BARBIE DRESS ══ */}
+      {/* ══ GORGEOUS BARBIE BALLGOWN ══ */}
       {/* Flared Lower Gown */}
       <mesh position={[0, 0.65, 0]} castShadow material={mats.dress1}>
         <cylinderGeometry args={[0.26, 0.58, 1.25, 24]} />
@@ -146,28 +151,53 @@ export function PlayerCharacter({ playerRef }: PlayerCharacterProps) {
         );
       })}
 
-      {/* ══ HEAD & REAL SNEHA PHOTO FACE ══ */}
+      {/* ══ SCULPTED 3D PRINCESS FACE & HEAD ══ */}
       <group ref={headRef} position={[0, 1.78, 0]}>
         {/* Head Base Mesh */}
         <mesh castShadow material={mats.skin}>
           <sphereGeometry args={[0.215, 20, 20]} />
         </mesh>
 
-        {/* Real Photo Face Projection Decal */}
-        <mesh position={[0, 0.02, 0.19]} rotation={[0, 0, 0]}>
-          <circleGeometry args={[0.18, 24]} />
-          <meshBasicMaterial
-            map={faceTexture}
-            toneMapped={false}
-            transparent
-            opacity={0.98}
-          />
+        {/* Rosy Cheek Blush */}
+        <mesh position={[0.11, 0.0, 0.17]}>
+          <sphereGeometry args={[0.045, 8, 8]} />
+          <primitive object={mats.blush} />
+        </mesh>
+        <mesh position={[-0.11, 0.0, 0.17]}>
+          <sphereGeometry args={[0.045, 8, 8]} />
+          <primitive object={mats.blush} />
         </mesh>
 
-        {/* Soft Skin Rim Blend Frame */}
-        <mesh position={[0, 0.02, 0.188]}>
-          <ringGeometry args={[0.165, 0.19, 24]} />
-          <meshStandardMaterial color={C_SKIN} roughness={0.5} />
+        {/* 🔴 SNEHA'S SIGNATURE RED BINDI 🔴 */}
+        <mesh position={[0, 0.08, 0.205]}>
+          <sphereGeometry args={[0.018, 8, 8]} />
+          <primitive object={mats.bindi} />
+        </mesh>
+
+        {/* 💛 GOLDEN NOSE STUD (NATH) 💛 */}
+        <mesh position={[0.038, -0.01, 0.21]} rotation={[Math.PI / 2, 0, 0]}>
+          <torusGeometry args={[0.012, 0.0035, 6, 12]} />
+          <primitive object={mats.gold} />
+        </mesh>
+
+        {/* Big Expressive Barbie Eyes */}
+        <mesh position={[0.076, 0.035, 0.195]} material={mats.eyes}>
+          <sphereGeometry args={[0.028, 10, 10]} />
+        </mesh>
+        <mesh position={[-0.076, 0.035, 0.195]} material={mats.eyes}>
+          <sphereGeometry args={[0.028, 10, 10]} />
+        </mesh>
+        {/* Diamond Eye Glints */}
+        <mesh position={[0.084, 0.045, 0.212]} material={mats.glint}>
+          <sphereGeometry args={[0.009, 6, 6]} />
+        </mesh>
+        <mesh position={[-0.068, 0.045, 0.212]} material={mats.glint}>
+          <sphereGeometry args={[0.009, 6, 6]} />
+        </mesh>
+
+        {/* Sweet Smiling Lips */}
+        <mesh position={[0, -0.055, 0.205]} rotation={[0.05, 0, 0]} material={mats.lip}>
+          <capsuleGeometry args={[0.02, 0.065, 4, 8]} />
         </mesh>
 
         {/* Long Flowing Silky Hair */}
@@ -231,27 +261,27 @@ export function PlayerCharacter({ playerRef }: PlayerCharacterProps) {
   );
 }
 
-// ── Floating Overhead Name Tag ───────────────────────────────
+// ── Horizontal Floating Overhead Name Tag (Clean & No vertical beam) ──
 
 function OverheadNameTag() {
   const textRef = useRef<THREE.Group>(null!);
 
   useFrame((state) => {
     if (textRef.current) {
-      textRef.current.position.y = 2.45 + Math.sin(state.clock.elapsedTime * 2.5) * 0.05;
+      textRef.current.position.y = 2.45 + Math.sin(state.clock.elapsedTime * 2.5) * 0.04;
     }
   });
 
   return (
     <group ref={textRef} position={[0, 2.45, 0]}>
-      {/* Glow Backing Tag */}
-      <mesh position={[0, 0, -0.02]}>
-        <capsuleGeometry args={[0.16, 1.8, 6, 12]} />
-        <meshBasicMaterial color="#FF1493" transparent opacity={0.65} />
+      {/* Horizontal Rounded Backing Pill */}
+      <mesh position={[0, 0, -0.02]} rotation={[0, 0, Math.PI / 2]}>
+        <capsuleGeometry args={[0.22, 1.8, 8, 16]} />
+        <meshBasicMaterial color="#FF1493" transparent opacity={0.7} />
       </mesh>
       {/* Name Text */}
       <Text
-        position={[0, 0.08, 0]}
+        position={[0, 0.07, 0]}
         fontSize={0.22}
         color="#FFFFFF"
         anchorX="center"
@@ -263,7 +293,7 @@ function OverheadNameTag() {
         👑 SNEHA 👑
       </Text>
       <Text
-        position={[0, -0.12, 0]}
+        position={[0, -0.11, 0]}
         fontSize={0.11}
         color="#FFD700"
         anchorX="center"
